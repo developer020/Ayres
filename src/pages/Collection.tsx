@@ -1,4 +1,5 @@
 import Navigation from "@/components/Navigation";
+import ProfileHeader from "@/components/ProfileHeader";
 import ProductCard from "@/components/ProductCard";
 import { Button } from "@/components/ui/button";
 import { Plus, Search } from "lucide-react";
@@ -15,6 +16,9 @@ const Collection = () => {
       brand: "Hermès",
       verified: true,
       serialNumber: "AO-HRM-2024-0891",
+      taps: 542,
+      storiesCount: 3,
+      provenance: "Authenticated at Hermès Paris, Rue du Faubourg Saint-Honoré"
     },
     {
       image: watchImg,
@@ -22,6 +26,9 @@ const Collection = () => {
       brand: "Patek Philippe",
       verified: true,
       serialNumber: "AO-PPH-2024-0234",
+      taps: 1289,
+      storiesCount: 2,
+      provenance: "Certified by Patek Philippe Geneva Salon, acquired 2023"
     },
     {
       image: sneakersImg,
@@ -29,6 +36,9 @@ const Collection = () => {
       brand: "Nike",
       verified: true,
       serialNumber: "AO-NKE-2024-1567",
+      taps: 873,
+      storiesCount: 5,
+      provenance: "Original release authenticated via Nike SNKRS Archive"
     },
   ];
 
@@ -38,6 +48,9 @@ const Collection = () => {
       
       <main className="pt-24 pb-16">
         <div className="container mx-auto px-6">
+          {/* Profile Header */}
+          <ProfileHeader />
+          
           {/* Header */}
           <div className="flex flex-col md:flex-row items-start md:items-center justify-between gap-6 mb-12">
             <div className="space-y-2">
