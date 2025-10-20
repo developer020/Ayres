@@ -1,19 +1,33 @@
 import { Link, useLocation } from "react-router-dom";
-import { Home, Shield, Wallet, Settings } from "lucide-react";
+import { Home, Shield, Wallet } from "lucide-react";
 import Logo from "./Logo";
+import { useEffect, useState } from "react";
 
 const Navigation = () => {
   const location = useLocation();
+  const [isScrolled, setIsScrolled] = useState(false);
+  
+  useEffect(() => {
+    const handleScroll = () => {
+      setIsScrolled(window.scrollY > 20);
+    };
+    
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
   
   const navItems = [
     { path: "/", label: "Home", icon: Home },
     { path: "/authenticate", label: "Authenticate", icon: Shield },
     { path: "/collection", label: "My Originals", icon: Wallet },
-    { path: "/settings", label: "Settings", icon: Settings },
   ];
 
   return (
-    <nav className="fixed top-0 left-0 right-0 z-50 glass-strong border-b border-border/50">
+    <nav className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 border-b ${
+      isScrolled 
+        ? "bg-card/80 backdrop-blur-xl border-border/50" 
+        : "bg-transparent border-transparent"
+    }`}>
       <div className="container mx-auto px-6 py-4">
         <div className="flex items-center justify-between">
           <Logo />

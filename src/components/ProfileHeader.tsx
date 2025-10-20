@@ -1,18 +1,24 @@
-import { Shield, Lock, Edit2, UserPlus, MapPin } from "lucide-react";
+import { Shield, Lock, Edit2, UserPlus, MapPin, Settings } from "lucide-react";
+import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 
 const ProfileHeader = () => {
   return (
-    <div className="glass-strong border border-border/50 rounded-lg p-8 mb-8 animate-fade-in">
+    <div className="bg-card border border-border/50 rounded-lg p-8 mb-8 animate-fade-in">
       <div className="flex flex-col md:flex-row gap-6 items-start md:items-center">
-        {/* Profile Photo */}
-        <div className="relative">
-          <div className="w-24 h-24 rounded-full glass border-2 border-primary/30 flex items-center justify-center text-3xl font-bold tracking-wider glow">
-            AO
-          </div>
-          <div className="absolute -bottom-1 -right-1 glass-strong rounded-full p-1.5 border border-primary/50">
-            <Shield className="h-4 w-4 text-primary" />
+        {/* Profile Photo - NFT Style Avatar */}
+        <div className="relative group">
+          <div className="absolute inset-0 rounded-full bg-gradient-to-br from-primary/40 via-primary/20 to-transparent blur-xl group-hover:blur-2xl transition-all duration-500 glow-strong" />
+          <Avatar className="relative w-24 h-24 ring-2 ring-primary/30 ring-offset-4 ring-offset-background shadow-[0_0_30px_rgba(0,209,255,0.3)] group-hover:shadow-[0_0_50px_rgba(0,209,255,0.5)] transition-all duration-500">
+            <AvatarImage src="" alt="Collector" className="object-cover" />
+            <AvatarFallback className="bg-gradient-to-br from-card via-card to-primary/10 text-3xl font-bold tracking-wider border-2 border-primary/20">
+              AO
+            </AvatarFallback>
+          </Avatar>
+          <div className="absolute -bottom-1 -right-1 glass-strong rounded-full p-1.5 border border-primary/50 shadow-lg backdrop-blur-xl">
+            <Shield className="h-4 w-4 text-primary drop-shadow-[0_0_8px_rgba(0,209,255,0.8)]" />
           </div>
         </div>
 
@@ -26,19 +32,25 @@ const ProfileHeader = () => {
               </p>
             </div>
             <div className="flex gap-2">
-              <Button size="sm" variant="outline" className="gap-2 glass border-border/50 hover:border-primary/50">
+              <Button size="sm" variant="outline" className="gap-2 bg-card/50 border-border/50 hover:border-primary/50 hover:bg-card/80 transition-all">
                 <Edit2 className="h-3 w-3" />
                 <span className="hidden sm:inline">Edit Profile</span>
               </Button>
-              <Button size="sm" variant="outline" className="gap-2 glass border-border/50 hover:border-primary/50">
+              <Button size="sm" variant="outline" className="gap-2 bg-card/50 border-border/50 hover:border-primary/50 hover:bg-card/80 transition-all">
                 <UserPlus className="h-3 w-3" />
                 <span className="hidden sm:inline">Invite Access</span>
               </Button>
+              <Link to="/settings">
+                <Button size="sm" variant="outline" className="gap-2 bg-card/50 border-border/50 hover:border-primary/50 hover:bg-card/80 transition-all">
+                  <Settings className="h-4 w-4" />
+                  <span className="sr-only">Settings</span>
+                </Button>
+              </Link>
             </div>
           </div>
 
           <div className="flex items-center gap-3 flex-wrap">
-            <Badge variant="outline" className="glass border-primary/30 text-primary glow uppercase tracking-wider">
+            <Badge variant="outline" className="bg-card/50 border-primary/30 text-primary shadow-[0_0_15px_rgba(0,209,255,0.2)] uppercase tracking-wider">
               <Shield className="h-3 w-3 mr-1" />
               Verified Collector
             </Badge>
