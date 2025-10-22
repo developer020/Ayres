@@ -133,4 +133,20 @@ All colors MUST be HSL.
   .text-glow {
     text-shadow: 0 0 20px hsl(var(--glow) / 0.5);
   }
+
+  .perspective-1000 {
+    perspective: 1000px;
+  }
+
+  .transform-style-3d {
+    transform-style: preserve-3d;
+  }
+
+  .backface-hidden {
+    backface-visibility: hidden;
+  }
+
+  .rotate-y-180 {
+    transform: rotateY(180deg);
+  }
 }

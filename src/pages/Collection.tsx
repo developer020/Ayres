@@ -11,6 +11,7 @@ import sneakersImg from "@/assets/product-sneakers.jpg";
 const Collection = () => {
   const products = [
     {
+      id: "1",
       image: handbagImg,
       name: "Kelly 28",
       brand: "Hermès",
@@ -21,6 +22,7 @@ const Collection = () => {
       provenance: "Authenticated at Hermès Paris, Rue du Faubourg Saint-Honoré"
     },
     {
+      id: "2",
       image: watchImg,
       name: "Nautilus 5711",
       brand: "Patek Philippe",
@@ -31,6 +33,7 @@ const Collection = () => {
       provenance: "Certified by Patek Philippe Geneva Salon, acquired 2023"
     },
     {
+      id: "3",
       image: sneakersImg,
       name: "Air Jordan 1 High",
       brand: "Nike",

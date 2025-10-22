@@ -1,8 +1,10 @@
 import { Shield, ExternalLink, Eye, Share2, RefreshCw, Plus, Film } from "lucide-react";
+import { Link } from "react-router-dom";
 import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 
 interface ProductCardProps {
+  id: string;
   image: string;
   name: string;
   brand: string;
@@ -14,6 +16,7 @@ interface ProductCardProps {
 }
 
 const ProductCard = ({ 
+  id,
   image, 
   name, 
   brand, 
@@ -24,7 +27,8 @@ const ProductCard = ({
   provenance = "Authenticated at Hermès Paris, Rue du Faubourg Saint-Honoré"
 }: ProductCardProps) => {
   return (
-    <Card className="group glass hover:glass-strong transition-all duration-500 overflow-hidden border-border/50 hover:border-primary/30 cursor-pointer">
+    <Link to={`/product/${id}`}>
+      <Card className="group glass hover:glass-strong transition-all duration-500 overflow-hidden border-border/50 hover:border-primary/30 cursor-pointer">
       <div className="relative aspect-square overflow-hidden">
         <img
           src={image}
@@ -104,6 +108,7 @@ const ProductCard = ({
         </div>
       </div>
     </Card>
+    </Link>
   );
 };
 
