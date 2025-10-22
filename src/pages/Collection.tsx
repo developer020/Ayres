@@ -51,11 +51,11 @@ const Collection = () => {
       <Navigation />
       
       {/* Mobile Logo - Top Center */}
-      <div className="md:hidden fixed top-0 left-0 right-0 z-40 flex items-center justify-center pt-6 pb-4 bg-gradient-to-b from-background to-transparent">
+      <div className="md:hidden fixed top-0 left-0 right-0 z-40 flex items-center justify-center pt-6 pb-4 bg-gradient-to-b from-background to-transparent animate-fade-in">
         <img 
           src={ayresLogo} 
           alt="Ayres Originals" 
-          className="h-12 w-12 object-contain opacity-90"
+          className="h-12 w-12 object-contain opacity-90 hover:opacity-100 transition-opacity duration-300"
         />
       </div>
       
