@@ -8,6 +8,7 @@ import Collection from "./pages/Collection";
 import ProductDetail from "./pages/ProductDetail";
 import Authenticate from "./pages/Authenticate";
 import Settings from "./pages/Settings";
+import Search from "./pages/Search";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -20,6 +21,7 @@ const App = () => (
       <BrowserRouter>
         <Routes>
           <Route path="/" element={<Index />} />
+          <Route path="/search" element={<Search />} />
           <Route path="/collection" element={<Collection />} />
           <Route path="/product/:id" element={<ProductDetail />} />
           <Route path="/authenticate" element={<Authenticate />} />
