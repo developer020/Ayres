@@ -3,12 +3,54 @@ import { Clock, Infinity } from "lucide-react";
 import productWatch from "@/assets/product-watch.jpg";
 import productHandbag from "@/assets/product-handbag.jpg";
 import productSneakers from "@/assets/product-sneakers.jpg";
+import productBirkin from "@/assets/product-birkin.jpg";
+import productOffWhite from "@/assets/product-offwhite.jpg";
+import productArt from "@/assets/product-art.jpg";
+import productRolex from "@/assets/product-rolex.jpg";
+import productSkateboard from "@/assets/product-skateboard.jpg";
+import productCamera from "@/assets/product-camera.jpg";
 
 const StoriesFeed = () => {
   const stories = [
     {
       id: "1",
       productId: "1",
+      productName: "Daytona Platinum",
+      thumbnail: productRolex,
+      title: "Ice Blue Legacy",
+      type: "origin",
+      duration: "permanent",
+    },
+    {
+      id: "2",
+      productId: "2",
+      productName: "Birkin 30 Cognac",
+      thumbnail: productBirkin,
+      title: "From Paris With Love",
+      type: "temporary",
+      duration: "18h",
+    },
+    {
+      id: "3",
+      productId: "3",
+      productName: "Nike x Off-White",
+      thumbnail: productOffWhite,
+      title: "Virgil's Vision",
+      type: "origin",
+      duration: "permanent",
+    },
+    {
+      id: "4",
+      productId: "4",
+      productName: "Azure Cascade",
+      thumbnail: productArt,
+      title: "Abstract Masterpiece",
+      type: "temporary",
+      duration: "12h",
+    },
+    {
+      id: "5",
+      productId: "5",
       productName: "Heritage Chronograph",
       thumbnail: productWatch,
       title: "The Making of a Masterpiece",
@@ -16,17 +58,35 @@ const StoriesFeed = () => {
       duration: "permanent",
     },
     {
-      id: "2",
-      productId: "2",
+      id: "6",
+      productId: "6",
+      productName: "Supreme Deck Limited",
+      thumbnail: productSkateboard,
+      title: "Skate Culture Icon",
+      type: "temporary",
+      duration: "6h",
+    },
+    {
+      id: "7",
+      productId: "7",
       productName: "Kelly Bag 32",
       thumbnail: productHandbag,
       title: "Parisian Craftsmanship",
-      type: "temporary",
-      duration: "23h",
+      type: "origin",
+      duration: "permanent",
     },
     {
-      id: "3",
-      productId: "3",
+      id: "8",
+      productId: "8",
+      productName: "Leica M6 Black Chrome",
+      thumbnail: productCamera,
+      title: "Vintage Photography Legend",
+      type: "temporary",
+      duration: "15h",
+    },
+    {
+      id: "9",
+      productId: "9",
       productName: "Air Jordan 1 Retro",
       thumbnail: productSneakers,
       title: "Limited Edition Drop",
