@@ -10,6 +10,11 @@ const Index = () => {
   const [isScrolled, setIsScrolled] = useState(false);
 
   useEffect(() => {
+    // Scroll to top when component mounts
+    window.scrollTo(0, 0);
+  }, []);
+
+  useEffect(() => {
     const handleScroll = () => {
       setIsScrolled(window.scrollY > 10);
     };

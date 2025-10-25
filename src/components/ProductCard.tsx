@@ -27,12 +27,13 @@ const ProductCard = ({
   provenance = "Authenticated at Hermès Paris, Rue du Faubourg Saint-Honoré"
 }: ProductCardProps) => {
   return (
-    <Link to={`/product/${id}`}>
+    <Link to={`/product/${id}`} onClick={() => window.scrollTo(0, 0)}>
       <Card className="group glass hover:glass-strong transition-all duration-500 overflow-hidden border-border/50 hover:border-primary/30 cursor-pointer">
       <div className="relative aspect-square overflow-hidden">
         <img
           src={image}
           alt={name}
+          loading="lazy"
           className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
         />
         <div className="absolute inset-0 bg-gradient-to-t from-background via-background/20 to-transparent opacity-60" />

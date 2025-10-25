@@ -103,6 +103,7 @@ const StoriesFeed = () => {
             <Link
               key={story.id}
               to={`/product/${story.productId}`}
+              onClick={() => window.scrollTo(0, 0)}
               className="group relative aspect-[9/16] rounded-lg overflow-hidden glass hover:glass-strong transition-all duration-500 animate-fade-in"
               style={{ animationDelay: `${index * 100}ms` }}
             >
@@ -111,6 +112,7 @@ const StoriesFeed = () => {
                 <img
                   src={story.thumbnail}
                   alt={story.title}
+                  loading="lazy"
                   className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-background via-background/60 to-transparent" />
@@ -122,6 +124,7 @@ const StoriesFeed = () => {
                   <img
                     src={story.thumbnail}
                     alt={story.productName}
+                    loading="lazy"
                     className="w-full h-full object-cover"
                   />
                 </div>

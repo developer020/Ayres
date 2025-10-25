@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { ArrowLeft, Shield, ExternalLink, Lock, Unlock, Film, Calendar, Eye } from "lucide-react";
 import { Card } from "@/components/ui/card";
@@ -91,6 +91,11 @@ const ProductDetail = () => {
   const [selectedStory, setSelectedStory] = useState<string | null>(null);
 
   const product = productData[id || "1"];
+
+  // Scroll to top when component mounts or ID changes
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, [id]);
 
   if (!product) {
     return <div>Product not found</div>;
