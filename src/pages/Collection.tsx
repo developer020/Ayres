@@ -1,50 +1,53 @@
+import { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import Navigation from "@/components/Navigation";
 import ProfileHeader from "@/components/ProfileHeader";
 import ProductCard from "@/components/ProductCard";
 import { Button } from "@/components/ui/button";
 import { Plus, Search } from "lucide-react";
 import { Input } from "@/components/ui/input";
-import handbagImg from "@/assets/product-handbag.jpg";
-import watchImg from "@/assets/product-watch.jpg";
-import sneakersImg from "@/assets/product-sneakers.jpg";
 import ayresLogo from "@/assets/ayres-logo.png";
+import { useAuth } from "@/hooks/useAuth";
+import { supabase } from "@/integrations/supabase/client";
+
+interface Product {
+  id: string;
+  name: string;
+  brand: string;
+  image_url: string;
+  provenance: string | null;
+  serial_number: string;
+}
 
 const Collection = () => {
-  const products = [
-    {
-      id: "1",
-      image: handbagImg,
-      name: "Kelly 28",
-      brand: "Hermès",
-      verified: true,
-      serialNumber: "AO-HRM-2024-0891",
-      taps: 542,
-      storiesCount: 3,
-      provenance: "Authenticated at Hermès Paris, Rue du Faubourg Saint-Honoré"
-    },
-    {
-      id: "2",
-      image: watchImg,
-      name: "Nautilus 5711",
-      brand: "Patek Philippe",
-      verified: true,
-      serialNumber: "AO-PPH-2024-0234",
-      taps: 1289,
-      storiesCount: 2,
-      provenance: "Certified by Patek Philippe Geneva Salon, acquired 2023"
-    },
-    {
-      id: "3",
-      image: sneakersImg,
-      name: "Air Jordan 1 High",
-      brand: "Nike",
-      verified: true,
-      serialNumber: "AO-NKE-2024-1567",
-      taps: 873,
-      storiesCount: 5,
-      provenance: "Original release authenticated via Nike SNKRS Archive"
-    },
-  ];
+  const { user } = useAuth();
+  const navigate = useNavigate();
+  const [products, setProducts] = useState<Product[]>([]);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    if (!user) {
+      navigate('/auth');
+      return;
+    }
+
+    const fetchProducts = async () => {
+      const { data, error } = await supabase
+        .from('products')
+        .select('*')
+        .eq('user_id', user.id)
+        .order('created_at', { ascending: false });
+
+      if (error) {
+        console.error('Error fetching products:', error);
+      } else {
+        setProducts(data || []);
+      }
+      setLoading(false);
+    };
+
+    fetchProducts();
+  }, [user, navigate]);
 
   return (
     <div className="min-h-screen bg-background">
@@ -77,6 +80,7 @@ const Collection = () => {
             
             <Button
               size="lg"
+              onClick={() => navigate('/authenticate')}
               className="gap-2 glass-strong hover:glass text-foreground hover:text-primary border-primary/30 hover:border-primary transition-all duration-300 glow uppercase tracking-widest"
             >
               <Plus className="h-5 w-5" />
@@ -96,20 +100,31 @@ const Collection = () => {
           </div>
 
           {/* Products Grid */}
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 animate-fade-in">
-            {products.map((product, index) => (
-              <div
-                key={index}
-                style={{ animationDelay: `${index * 100}ms` }}
-                className="animate-slide-up"
-              >
-                <ProductCard {...product} />
-              </div>
-            ))}
-          </div>
-
-          {/* Empty State Helper */}
-          {products.length === 0 && (
+          {loading ? (
+            <div className="text-center py-16">
+              <p className="text-muted-foreground">Loading your collection...</p>
+            </div>
+          ) : products.length > 0 ? (
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 animate-fade-in">
+              {products.map((product, index) => (
+                <div
+                  key={product.id}
+                  style={{ animationDelay: `${index * 100}ms` }}
+                  className="animate-slide-up"
+                >
+                  <ProductCard 
+                    id={product.id}
+                    image={product.image_url}
+                    name={product.name}
+                    brand={product.brand}
+                    verified={true}
+                    serialNumber={product.serial_number}
+                    provenance={product.provenance || ""}
+                  />
+                </div>
+              ))}
+            </div>
+          ) : (
             <div className="text-center py-16 glass rounded-lg border border-border/30">
               <div className="glass-strong w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4">
                 <Plus className="h-8 w-8 text-primary" />
@@ -120,7 +135,10 @@ const Collection = () => {
               <p className="text-muted-foreground mb-6 tracking-wide">
                 Add your first authenticated product
               </p>
-              <Button className="uppercase tracking-widest">
+              <Button 
+                onClick={() => navigate('/authenticate')}
+                className="uppercase tracking-widest"
+              >
                 Add Product
               </Button>
             </div>

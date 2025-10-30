@@ -1,10 +1,22 @@
+import { useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 import Navigation from "@/components/Navigation";
 import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Switch } from "@/components/ui/switch";
 import { User, Bell, Shield, Link2, LogOut } from "lucide-react";
+import { useAuth } from "@/hooks/useAuth";
 
 const Settings = () => {
+  const { user, signOut } = useAuth();
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    if (!user) {
+      navigate('/auth');
+    }
+  }, [user, navigate]);
+
   const settingSections = [
     {
       title: "Account",
@@ -104,6 +116,7 @@ const Settings = () => {
               <div className="space-y-4">
                 <Button
                   variant="outline"
+                  onClick={signOut}
                   className="w-full justify-start gap-2 border-destructive/50 text-destructive hover:bg-destructive/10 uppercase tracking-widest"
                 >
                   <LogOut className="h-4 w-4" />
