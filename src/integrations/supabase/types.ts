@@ -16,8 +16,10 @@ export type Database = {
     Tables: {
       products: {
         Row: {
+          blockchain_hash: string | null
           brand: string
           created_at: string | null
+          digital_twin_data: Json | null
           id: string
           image_url: string
           name: string
@@ -28,8 +30,10 @@ export type Database = {
           verified_at: string | null
         }
         Insert: {
+          blockchain_hash?: string | null
           brand: string
           created_at?: string | null
+          digital_twin_data?: Json | null
           id?: string
           image_url: string
           name: string
@@ -40,8 +44,10 @@ export type Database = {
           verified_at?: string | null
         }
         Update: {
+          blockchain_hash?: string | null
           brand?: string
           created_at?: string | null
+          digital_twin_data?: Json | null
           id?: string
           image_url?: string
           name?: string
