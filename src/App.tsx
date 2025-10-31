@@ -11,7 +11,6 @@ import Authenticate from "./pages/Authenticate";
 import Settings from "./pages/Settings";
 import Search from "./pages/Search";
 import Auth from "./pages/Auth";
-import Profile from "./pages/Profile";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -28,7 +27,6 @@ const App = () => (
             <Route path="/search" element={<Search />} />
             <Route path="/collection" element={<Collection />} />
             <Route path="/product/:id" element={<ProductDetail />} />
-            <Route path="/profile/:id" element={<Profile />} />
             <Route path="/authenticate" element={<Authenticate />} />
             <Route path="/settings" element={<Settings />} />
             <Route path="/auth" element={<Auth />} />
