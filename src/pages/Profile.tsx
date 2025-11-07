@@ -59,7 +59,9 @@ const Profile = () => {
       if (productsError) throw productsError;
       setProducts(productsData || []);
     } catch (error) {
-      console.error('Error fetching profile:', error);
+      if (import.meta.env.DEV) {
+        console.error('Error fetching profile:', error);
+      }
     } finally {
       setLoading(false);
     }

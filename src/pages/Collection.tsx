@@ -39,7 +39,9 @@ const Collection = () => {
         .order('created_at', { ascending: false });
 
       if (error) {
-        console.error('Error fetching products:', error);
+        if (import.meta.env.DEV) {
+          console.error('Error fetching products:', error);
+        }
       } else {
         setProducts(data || []);
       }

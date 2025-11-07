@@ -71,7 +71,9 @@ const ProductDetail = () => {
 
       setOwner(profileData);
     } catch (error) {
-      console.error('Error fetching product:', error);
+      if (import.meta.env.DEV) {
+        console.error('Error fetching product:', error);
+      }
     } finally {
       setLoading(false);
     }

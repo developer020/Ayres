@@ -122,7 +122,9 @@ const Authenticate = () => {
         throw new Error("Verification failed");
       }
     } catch (error: any) {
-      console.error("Verification error:", error);
+      if (import.meta.env.DEV) {
+        console.error("Verification error:", error);
+      }
       toast.error(error.message || "Verification failed");
       setStep("failed");
     }

@@ -28,7 +28,9 @@ const ProductsFeed = () => {
         .limit(20);
 
       if (error) {
-        console.error('Error fetching products:', error);
+        if (import.meta.env.DEV) {
+          console.error('Error fetching products:', error);
+        }
       } else {
         setProducts(data || []);
       }
