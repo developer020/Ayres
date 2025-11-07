@@ -8,6 +8,7 @@ import { supabase } from "@/integrations/supabase/client";
 import { useAuth } from "@/hooks/useAuth";
 import { toast } from "sonner";
 import { useNavigate } from "react-router-dom";
+import { z } from "zod";
 
 interface VerificationResult {
   confidence: number;
@@ -25,6 +26,12 @@ interface DigitalTwin {
   metadata: any;
   attributes: Array<{ trait_type: string; value: any }>;
 }
+
+const productInputSchema = z.object({
+  brand: z.string().trim().min(1, "Brand is required").max(100, "Brand must be less than 100 characters"),
+  productName: z.string().trim().min(1, "Product name is required").max(200, "Product name must be less than 200 characters"),
+  serialNumber: z.string().trim().min(3, "Serial number must be at least 3 characters").max(50, "Serial number must be less than 50 characters").regex(/^[A-Z0-9-]+$/i, "Serial number can only contain letters, numbers, and hyphens")
+});
 
 const Authenticate = () => {
   const { user } = useAuth();
@@ -54,8 +61,21 @@ const Authenticate = () => {
       return;
     }
 
-    if (!selectedFile || !serialNumber || !brand || !productName) {
-      toast.error("Please provide all required information");
+    if (!selectedFile) {
+      toast.error("Please upload a product image");
+      return;
+    }
+
+    // Validate inputs
+    const validation = productInputSchema.safeParse({
+      brand,
+      productName,
+      serialNumber
+    });
+
+    if (!validation.success) {
+      const firstError = validation.error.errors[0];
+      toast.error(firstError.message);
       return;
     }
 
