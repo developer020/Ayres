@@ -1,14 +1,5 @@
 import { Link } from "react-router-dom";
 import { Clock, Infinity } from "lucide-react";
-import productWatch from "@/assets/product-watch.jpg";
-import productHandbag from "@/assets/product-handbag.jpg";
-import productSneakers from "@/assets/product-sneakers.jpg";
-import productBirkin from "@/assets/product-birkin.jpg";
-import productOffWhite from "@/assets/product-offwhite.jpg";
-import productArt from "@/assets/product-art.jpg";
-import productRolex from "@/assets/product-rolex.jpg";
-import productSkateboard from "@/assets/product-skateboard.jpg";
-import productCamera from "@/assets/product-camera.jpg";
 
 const StoriesFeed = () => {
   const stories = [
@@ -16,7 +7,7 @@ const StoriesFeed = () => {
       id: "1",
       productId: "1",
       productName: "Daytona Platinum",
-      thumbnail: productRolex,
+      thumbnail: "/images/product-rolex.jpg",
       title: "Ice Blue Legacy",
       type: "origin",
       duration: "permanent",
@@ -25,7 +16,7 @@ const StoriesFeed = () => {
       id: "2",
       productId: "2",
       productName: "Birkin 30 Cognac",
-      thumbnail: productBirkin,
+      thumbnail: "/images/product-birkin.jpg",
       title: "From Paris With Love",
       type: "temporary",
       duration: "18h",
@@ -34,7 +25,7 @@ const StoriesFeed = () => {
       id: "3",
       productId: "3",
       productName: "Nike x Off-White",
-      thumbnail: productOffWhite,
+      thumbnail: "/images/product-offwhite.jpg",
       title: "Virgil's Vision",
       type: "origin",
       duration: "permanent",
@@ -43,7 +34,7 @@ const StoriesFeed = () => {
       id: "4",
       productId: "4",
       productName: "Azure Cascade",
-      thumbnail: productArt,
+      thumbnail: "/images/product-art.jpg",
       title: "Abstract Masterpiece",
       type: "temporary",
       duration: "12h",
@@ -52,7 +43,7 @@ const StoriesFeed = () => {
       id: "5",
       productId: "5",
       productName: "Heritage Chronograph",
-      thumbnail: productWatch,
+      thumbnail: "/images/product-watch.jpg",
       title: "The Making of a Masterpiece",
       type: "origin",
       duration: "permanent",
@@ -61,7 +52,7 @@ const StoriesFeed = () => {
       id: "6",
       productId: "6",
       productName: "Supreme Deck Limited",
-      thumbnail: productSkateboard,
+      thumbnail: "/images/product-skateboard.jpg",
       title: "Skate Culture Icon",
       type: "temporary",
       duration: "6h",
@@ -70,7 +61,7 @@ const StoriesFeed = () => {
       id: "7",
       productId: "7",
       productName: "Kelly Bag 32",
-      thumbnail: productHandbag,
+      thumbnail: "/images/product-handbag.jpg",
       title: "Parisian Craftsmanship",
       type: "origin",
       duration: "permanent",
@@ -79,7 +70,7 @@ const StoriesFeed = () => {
       id: "8",
       productId: "8",
       productName: "Leica M6 Black Chrome",
-      thumbnail: productCamera,
+      thumbnail: "/images/product-camera.jpg",
       title: "Vintage Photography Legend",
       type: "temporary",
       duration: "15h",
@@ -88,7 +79,7 @@ const StoriesFeed = () => {
       id: "9",
       productId: "9",
       productName: "Air Jordan 1 Retro",
-      thumbnail: productSneakers,
+      thumbnail: "/images/product-sneakers.jpg",
       title: "Limited Edition Drop",
       type: "origin",
       duration: "permanent",
