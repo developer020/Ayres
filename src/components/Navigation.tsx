@@ -1,5 +1,6 @@
 import { Link, useLocation } from "react-router-dom";
 import { Home, Shield, Wallet, Search } from "lucide-react";
+import Logo from "./Logo";
 import { useEffect, useState } from "react";
 
 const Navigation = () => {
@@ -31,7 +32,9 @@ const Navigation = () => {
           : "bg-transparent border-transparent"
       }`}>
         <div className="container mx-auto px-6 py-4">
-          <div className="flex items-center justify-center">
+          <div className="flex items-center justify-between">
+            <Logo />
+            
             <div className="flex items-center gap-8">
               {navItems.map((item) => {
                 const Icon = item.icon;
