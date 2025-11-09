@@ -96,7 +96,10 @@ export type Database = {
       [_ in never]: never
     }
     Functions: {
-      [_ in never]: never
+      get_email_from_username: {
+        Args: { input_username: string }
+        Returns: string
+      }
     }
     Enums: {
       [_ in never]: never

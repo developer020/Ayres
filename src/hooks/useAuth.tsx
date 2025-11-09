@@ -70,27 +70,15 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
     
     // Check if input is username (not an email)
     if (!emailOrUsername.includes('@')) {
-      const { data, error: profileError } = await supabase
-        .from('profiles')
-        .select('id')
-        .eq('username', emailOrUsername)
-        .single();
+      const { data, error: rpcError } = await supabase
+        .rpc('get_email_from_username', { input_username: emailOrUsername });
       
-      if (profileError || !data) {
+      if (rpcError || !data) {
         toast.error('Invalid username or password');
-        return { error: profileError || new Error('User not found') };
+        return { error: rpcError || new Error('User not found') };
       }
       
-      // Get email from auth.users via RPC or use the user_id
-      const { data: userData, error: userError } = await supabase.auth.admin.getUserById(data.id);
-      
-      if (userError || !userData?.user?.email) {
-        // Fallback: try to sign in with username as email
-        toast.error('Invalid username or password');
-        return { error: userError || new Error('User email not found') };
-      }
-      
-      email = userData.user.email;
+      email = data;
     }
 
     const { error } = await supabase.auth.signInWithPassword({
