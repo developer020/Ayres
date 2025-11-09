@@ -8,11 +8,12 @@ import ayresLogo from "@/assets/ayres-logo.png";
 
 const Auth = () => {
   const [isLogin, setIsLogin] = useState(true);
+  const [isForgotPassword, setIsForgotPassword] = useState(false);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [username, setUsername] = useState("");
   const [isLoading, setIsLoading] = useState(false);
-  const { signIn, signUp, user } = useAuth();
+  const { signIn, signUp, user, resetPassword } = useAuth();
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -25,7 +26,10 @@ const Auth = () => {
     e.preventDefault();
     setIsLoading(true);
 
-    if (isLogin) {
+    if (isForgotPassword) {
+      await resetPassword(email);
+      setIsForgotPassword(false);
+    } else if (isLogin) {
       await signIn(email, password);
     } else {
       if (!username.trim()) {
@@ -48,17 +52,19 @@ const Auth = () => {
             className="h-16 w-16 object-contain mb-4"
           />
           <h1 className="text-3xl font-bold tracking-wider uppercase mb-2">
-            {isLogin ? "Welcome Back" : "Join Ayres"}
+            {isForgotPassword ? "Reset Password" : isLogin ? "Welcome Back" : "Join Ayres"}
           </h1>
           <p className="text-muted-foreground text-sm tracking-wide text-center">
-            {isLogin 
-              ? "Sign in to access your authenticated collection" 
-              : "Create your account and start verifying luxury originals"}
+            {isForgotPassword 
+              ? "Enter your email to receive a password reset link"
+              : isLogin 
+                ? "Sign in to access your authenticated collection" 
+                : "Create your account and start verifying luxury originals"}
           </p>
         </div>
 
         <form onSubmit={handleSubmit} className="space-y-4">
-          {!isLogin && (
+          {!isLogin && !isForgotPassword && (
             <div>
               <label className="text-sm tracking-wide text-muted-foreground uppercase">
                 Username
@@ -76,50 +82,73 @@ const Auth = () => {
 
           <div>
             <label className="text-sm tracking-wide text-muted-foreground uppercase">
-              Email
+              {isForgotPassword ? "Email" : isLogin ? "Email or Username" : "Email"}
             </label>
             <Input
-              type="email"
+              type={isForgotPassword || !isLogin ? "email" : "text"}
               value={email}
               onChange={(e) => setEmail(e.target.value)}
               className="glass mt-1"
-              placeholder="your@email.com"
+              placeholder={isLogin && !isForgotPassword ? "email or username" : "your@email.com"}
               required
             />
           </div>
 
-          <div>
-            <label className="text-sm tracking-wide text-muted-foreground uppercase">
-              Password
-            </label>
-            <Input
-              type="password"
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
-              className="glass mt-1"
-              placeholder="••••••••"
-              required
-            />
-          </div>
+          {!isForgotPassword && (
+            <div>
+              <label className="text-sm tracking-wide text-muted-foreground uppercase">
+                Password
+              </label>
+              <Input
+                type="password"
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+                className="glass mt-1"
+                placeholder="••••••••"
+                required
+              />
+            </div>
+          )}
 
           <Button
             type="submit"
             className="w-full uppercase tracking-widest"
             disabled={isLoading}
           >
-            {isLoading ? "Processing..." : isLogin ? "Sign In" : "Create Account"}
+            {isLoading ? "Processing..." : isForgotPassword ? "Send Reset Link" : isLogin ? "Sign In" : "Create Account"}
           </Button>
         </form>
 
-        <div className="mt-6 text-center">
+        <div className="mt-6 text-center space-y-2">
+          {isLogin && !isForgotPassword && (
+            <button
+              onClick={() => setIsForgotPassword(true)}
+              className="text-sm text-muted-foreground hover:text-primary transition-colors tracking-wide block w-full"
+            >
+              Forgot password?
+            </button>
+          )}
+          
           <button
-            onClick={() => setIsLogin(!isLogin)}
+            onClick={() => {
+              setIsLogin(!isLogin);
+              setIsForgotPassword(false);
+            }}
             className="text-sm text-muted-foreground hover:text-primary transition-colors tracking-wide"
           >
             {isLogin 
               ? "Don't have an account? Sign up" 
               : "Already have an account? Sign in"}
           </button>
+
+          {isForgotPassword && (
+            <button
+              onClick={() => setIsForgotPassword(false)}
+              className="text-sm text-muted-foreground hover:text-primary transition-colors tracking-wide block w-full"
+            >
+              Back to sign in
+            </button>
+          )}
         </div>
       </Card>
     </div>

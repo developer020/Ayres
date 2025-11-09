@@ -9,8 +9,9 @@ interface AuthContextType {
   session: Session | null;
   loading: boolean;
   signUp: (email: string, password: string, username: string) => Promise<{ error: any }>;
-  signIn: (email: string, password: string) => Promise<{ error: any }>;
+  signIn: (emailOrUsername: string, password: string) => Promise<{ error: any }>;
   signOut: () => Promise<void>;
+  resetPassword: (email: string) => Promise<{ error: any }>;
 }
 
 const AuthContext = createContext<AuthContextType | undefined>(undefined);
@@ -64,7 +65,34 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
     return { error: null };
   };
 
-  const signIn = async (email: string, password: string) => {
+  const signIn = async (emailOrUsername: string, password: string) => {
+    let email = emailOrUsername;
+    
+    // Check if input is username (not an email)
+    if (!emailOrUsername.includes('@')) {
+      const { data, error: profileError } = await supabase
+        .from('profiles')
+        .select('id')
+        .eq('username', emailOrUsername)
+        .single();
+      
+      if (profileError || !data) {
+        toast.error('Invalid username or password');
+        return { error: profileError || new Error('User not found') };
+      }
+      
+      // Get email from auth.users via RPC or use the user_id
+      const { data: userData, error: userError } = await supabase.auth.admin.getUserById(data.id);
+      
+      if (userError || !userData?.user?.email) {
+        // Fallback: try to sign in with username as email
+        toast.error('Invalid username or password');
+        return { error: userError || new Error('User email not found') };
+      }
+      
+      email = userData.user.email;
+    }
+
     const { error } = await supabase.auth.signInWithPassword({
       email,
       password,
@@ -80,6 +108,22 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
     return { error: null };
   };
 
+  const resetPassword = async (email: string) => {
+    const redirectUrl = `${window.location.origin}/auth`;
+    
+    const { error } = await supabase.auth.resetPasswordForEmail(email, {
+      redirectTo: redirectUrl,
+    });
+
+    if (error) {
+      toast.error(error.message);
+      return { error };
+    }
+
+    toast.success('Password reset email sent! Check your inbox.');
+    return { error: null };
+  };
+
   const signOut = async () => {
     const { error } = await supabase.auth.signOut();
     if (error) {
@@ -91,7 +135,7 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
   };
 
   return (
-    <AuthContext.Provider value={{ user, session, loading, signUp, signIn, signOut }}>
+    <AuthContext.Provider value={{ user, session, loading, signUp, signIn, signOut, resetPassword }}>
       {children}
     </AuthContext.Provider>
   );
