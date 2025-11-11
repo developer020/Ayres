@@ -7,7 +7,7 @@
 ## 🔍 Overview
 
 **Ayres Originals** is a verification platform that merges **AI**, **Blockchain**, and **Product Tagging Technologies** (QR, NFC, RFID) to help consumers instantly verify the authenticity of physical products.  
-With a single tap, users can confirm any product is *genuinely original* see its history, origin, chain-of ownership and other cool features.
+With a single tap, users can confirm any product is *genuinely original*, see its history, origin, chain-of ownership and other cool features.
 
 This repository contains the **B2C mobile application**, the public-facing gateway where users interact with verified products, view authenticity reports, and manage their verified collections.
 
