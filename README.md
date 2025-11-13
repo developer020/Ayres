@@ -1,7 +1,8 @@
 # 🪶 Ayres Originals — B2C Application
 
 ### Authenticate original products and eliminate fakes, with one tap.
-
+the application: https://ayresoriginals.com
+landing page: https://ayresoriginals.lovable.app
 ---
 
 ## 🔍 Overview
