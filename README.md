@@ -1,8 +1,7 @@
 # 🪶 Ayres Originals — B2C Application
 
 ### Authenticate original products and eliminate fakes, with one tap.
-the application: https://ayresoriginals.com
-landing page: https://ayresoriginals.lovable.app
+
 ---
 
 ## 🔍 Overview
@@ -11,6 +10,9 @@ landing page: https://ayresoriginals.lovable.app
 With a single tap, users can confirm any product is *genuinely original*, see its history, origin, chain-of ownership and other cool features.
 
 This repository contains the **B2C mobile application**, the public-facing gateway where users interact with verified products, view authenticity reports, and manage their verified collections.
+
+the application: https://ayresoriginals.com
+landing page: https://ayresoriginals.lovable.app
 
 ---
 
